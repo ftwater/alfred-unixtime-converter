@@ -8,11 +8,14 @@ import (
 
 // TimeStruct is a struct
 type TimeStruct struct {
-	Value          string
-	Unixtime       int64
-	UnixtimeMillis int64
-	DateTime       string
-	LocalDateTime  string
+	Value                string
+	Unixtime             int64
+	UnixtimeMillis       int64
+	DateTime             string
+	LocalDateTime        string
+	StandardTimeStrLong  string
+	StandardTimeStrShort string
+	StandardDateStr      string
 }
 
 var hhmmss = regexp.MustCompile(`^[0-2]?[0-9]:[0-5][0-9]:[0-5][0-9]`)
@@ -76,10 +79,13 @@ func NewInputFormatter(input string) InputFormatter {
 
 func newTimeStruct(v string, t time.Time) TimeStruct {
 	return TimeStruct{
-		Value:          v,
-		Unixtime:       t.Unix(),
-		UnixtimeMillis: t.UnixNano() / int64(time.Millisecond),
-		DateTime:       t.UTC().Format(layout),
-		LocalDateTime:  t.Local().Format(layout),
+		Value:                v,
+		Unixtime:             t.Unix(),
+		UnixtimeMillis:       t.UnixNano() / int64(time.Millisecond),
+		DateTime:             t.UTC().Format(layout),
+		LocalDateTime:        t.Local().Format(layout),
+		StandardTimeStrLong:  t.Local().Format("2006-01-02 15:04:05.000"),
+		StandardTimeStrShort: t.Local().Format("2006-01-02 15:04:05"),
+		StandardDateStr:      t.Local().Format("2006-01-02"),
 	}
 }

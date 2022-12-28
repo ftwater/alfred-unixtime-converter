@@ -30,6 +30,9 @@ func ConvertToAlfredJSON(dt date.TimeStruct) string {
 	datetime := dt.DateTime
 	unixtime := strconv.FormatInt(dt.Unixtime, 10)
 	unixtimems := strconv.FormatInt(dt.UnixtimeMillis, 10)
+	standardtimestrlong := dt.StandardTimeStrLong
+	standardtimestrshort := dt.StandardTimeStrShort
+	standarddatestr := dt.StandardDateStr
 
 	item0 := Item{
 		UID:      localDatetime,
@@ -55,8 +58,26 @@ func ConvertToAlfredJSON(dt date.TimeStruct) string {
 		SubTitle: fmt.Sprintf("%s: Unix Timestamp (ms)", value),
 		Arg:      unixtimems,
 	}
+	item4 := Item{
+		UID:      standardtimestrshort,
+		Title:    standardtimestrshort,
+		SubTitle: fmt.Sprintf("%s: standardtimestr-short (ms)", standardtimestrshort),
+		Arg:      standardtimestrshort,
+	}
+	item5 := Item{
+		UID:      standarddatestr,
+		Title:    standarddatestr,
+		SubTitle: fmt.Sprintf("%s: standarddatestr", standarddatestr),
+		Arg:      standarddatestr,
+	}
+	item6 := Item{
+		UID:      standardtimestrlong,
+		Title:    standardtimestrlong,
+		SubTitle: fmt.Sprintf("%s: standardtimestr-long (mm)", standardtimestrlong),
+		Arg:      standardtimestrlong,
+	}
 
-	items := Items{Items: []Item{item0, item1, item2, item3}}
+	items := Items{Items: []Item{item4, item5, item6, item0, item1, item2, item3}}
 
 	json, err := json.Marshal(items)
 	if err != nil {
