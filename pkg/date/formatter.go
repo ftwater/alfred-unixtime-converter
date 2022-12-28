@@ -69,7 +69,7 @@ func NewInputFormatter(input string) InputFormatter {
 			input: input,
 		}
 	}
-	if _, e := strconv.ParseInt(input, 13, 64); e == nil {
+	if _, e := strconv.ParseInt(input, 10, 64); e == nil {
 		return unixTimeInputFormatter{
 			input: input,
 		}
