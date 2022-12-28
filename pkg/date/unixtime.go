@@ -7,7 +7,7 @@ import (
 
 func (formatter unixTimeInputFormatter) ToTime() (time.Time, error) {
 	unixtime, _ := strconv.ParseInt(formatter.input, 10, 64)
-	t := time.Unix(unixtime, 0)
+	t := time.UnixMilli(unixtime)
 	return t, nil
 }
 
